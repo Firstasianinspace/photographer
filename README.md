@@ -1,6 +1,7 @@
 # photographer
 Landing page for a photographer
-
+Live demo
+<a href="https://firstasianinspace.github.io/photographer/">Demo</a>
 ## Project setup
 ```
 npm install
