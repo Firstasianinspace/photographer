@@ -35,16 +35,7 @@
             <br>Which challenges are you facing?
             What are your goals and expectations? What would success look like and how much do you plan
             to spend to get there?</p>
-            <div class="contact-socials">
-            <div class="social-icon"
-            v-for="(item, index) of socials" :key="'item_'+index"
-            >
-              <svg class="ic24">
-                <use :xlink:href="getIcon('socials', item)"></use>
-              </svg>
-            </div>
-
-            </div>
+            <socials />
           </div>
         </div>
       </div>
@@ -55,33 +46,22 @@
 <script>
 import { SplitText } from "gsap/all";
 import ContactForm from "./ContactForm.vue";
+import socials from "./socials.vue";
 
 export default {
   name: 'Contact Form',
   data () {
     return {
       show: false,
-      socials: [
-          'facebook',
-          'twitter',
-          'linkedin',
-          'dribbble',
-          'behance',
-          'instagram'
-      ]
     }
   },
   components: {
-    ContactForm
+    ContactForm,
+    socials
   },
   methods: {
-    // I know it's not necessary in this case, i do it because i can
-    getIcon (socials, icon) {
-      return require(`@/assets/icons/${socials}.svg`)+'#'+icon
-    },
     openContact() {
       this.show = !this.show
-
     },
     closeContact() {
       this.show = !this.show
@@ -134,7 +114,7 @@ export default {
         opacity: 0,
       }, {
         opacity: 1,
-        duration: 1,
+        duration: .6,
         stagger: 0.15,
         onComplete: done
       })
@@ -187,25 +167,24 @@ export default {
         opacity: 1,
       }, {
         opacity: 0,
-        duration: .6,
+        duration: .4,
         stagger: 0.10,
         onComplete: done
       })
       this.gsap.to(el, {
         duration: 1,
       })
-
     },
   },
   mounted() {
     
-
   },
 }
 </script>
 <style scoped lang="scss">
 .hello {
   height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
   position: relative;
   @media screen and (max-width: 1080px) {
     padding: 4vh 0;
@@ -233,14 +212,8 @@ export default {
     }
   }
 }
-.ic24 {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-}
 .contact-wrapper {
   padding: 8vh;
-
   position: relative;
   @media screen and (max-width: 1080px) {
     padding: 2vh;

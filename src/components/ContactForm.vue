@@ -1,32 +1,17 @@
 <template>
   <form class="vue-form" @submit.prevent="submit">
-          <!-- <div class="error-message">
-            <p v-show="!email.valid">Oh, please enter a valid email address.</p>
-          </div> -->
     <div class="checkboxes">
-      <div class="single-checkbox">
-        <input type="radio" id="Portrait" value="Portrait" v-model="services" >
-        <label for="Portrait" class="custom-checkbox">Portrait</label>
-      </div>
-      <div class="single-checkbox">
-        <input type="radio" id="Lifestyle" value="Lifestyle" v-model="services">  
-        <label for="Lifestyle"  class="custom-checkbox">Lifestyle</label>
-      </div>
-      <div class="single-checkbox">
-        <input type="radio" id="E-COMMERCE" value="E-COMMERCE" v-model="services">                
-        <label for="E-COMMERCE"  class="custom-checkbox">E-COMMERCE</label>
-      </div>
-      <div class="single-checkbox">
-        <input type="radio" id="Other" value="Other" v-model="services">
-        <label for="Other"  class="custom-checkbox">Other</label>
-      </div>
+      <InputCheckbox fieldId="Portrait" v-model:names="names" value="Portrait"/>
+      <InputCheckbox fieldId="E-Commerce" v-model:names="names" value="E-Commerce"/>
+      <InputCheckbox fieldId="Lifestyle" v-model:names="names" value="Lifestyle"/>
+      <InputCheckbox fieldId="Other" v-model:names="names" value="Other"/>
     </div>
     <div class="custom-fields">
       <div>
-        <input type="text" name="name" id="name" placeholder="Your Name">
+        <input type="text" name="name" v-model="name" id="name" placeholder="Your Name">
       </div>
       <div>
-        <input type="email" name="email" id="email" required="" placeholder="Your Email">
+        <input type="email" name="email" v-model="email" id="email" required="" placeholder="Your Email">
       </div>
       <ResizeByClass/>
     </div>
@@ -37,22 +22,34 @@
 </template>
 
 <script>
-import ResizeByClass from "./ResizeByClass.vue";
+import ResizeByClass from "./form/ResizeByClass.vue";
+import InputCheckbox from "./form/InputCheckbox.vue";
+import { ref } from "vue";
 
   export default {
     name: 'ContactForm',
     components: {
-      ResizeByClass
+      ResizeByClass,
+      InputCheckbox
     },
     data () {
       return {
-        services: [],
-        
+        name: '',
+        email: '',
       }
+    },
+    setup() {
+      const names = ref([]);
+      return {
+        names,
+      };
+    },
+    methods: {
+
     },
     mounted () {
 
-    },
+    }
   }
 </script>
 

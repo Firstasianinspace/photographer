@@ -15,10 +15,8 @@
 }
 body {
     position: relative;
-
     background: #111111;
     color: #fff;
-
 }
 .loading {
   overflow: hidden;
@@ -46,6 +44,7 @@ section {
 */
 .hero { 
     height: 92vh;
+    height: calc(var(--vh, 1vh) * 92);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -55,6 +54,7 @@ section {
     padding-right: 8vh;
     @media screen and (max-width: 424px) {
       height: 70vh;
+      height: calc(var(--vh, 1vh) * 70);
     }
     &-subtitle {
         font-size: 1.7vw;
@@ -188,7 +188,6 @@ section {
 * === About ===
 */
 .info-text {
-
     display: grid;
     grid-template-columns: 55% 45%;
     padding: 8vw;
@@ -202,4 +201,15 @@ section {
 */
 .contact {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+}
+/*Most of the styles for contact inside a contact components
+
+/*
+* === Icons ===
+*/
+.ic24 {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
 }

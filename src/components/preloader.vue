@@ -9,9 +9,14 @@
 </template>
 
 <script>
-import gsap from "gsap"
-
   export default {
+    data() {
+      return {
+        loadingPercent: 0,
+        loadTime: 0,
+        interval: null
+      }
+    },
     created() {
         let perfData = window.performance.timing;
         let estimatedTime = Math.abs(perfData.loadEventEnd - perfData.navigationStart);
@@ -19,43 +24,36 @@ import gsap from "gsap"
         this.doProgress();
         this.removeScrolling();
       },
-      methods: {
-        doProgress() {
-          let step = this.loadTime / 100;
-          this.interval = setInterval(() => {
-            this.loadingPercent++
-          }, step);
-        },
-        removeScrolling() {
-          let body = document.body
-          body.classList.add("loading")
-        },
+    methods: {
+      doProgress() {
+        let step = this.loadTime / 100;
+        this.interval = setInterval(() => {
+          this.loadingPercent++
+        }, step);
       },
-      computed: {
-        loaded() {
-          return this.loadingPercent + '%'
-        }
+      removeScrolling() {
+        let body = document.body
+        body.classList.add("loading")
       },
-      watch: {
-        loadingPercent(val) {
-          if (val >= 100) {
-          let body = document.body
-          body.classList.remove("loading")
-          gsap.to(".preloader", {
-            yPercent: -100,
-            duration: 1, 
-          })
-            clearInterval(this.interval)
-          }
-        }
-      },
-      data() {
-        return {
-          loadingPercent: 0,
-          loadTime: 0,
-          interval: null
+    },
+    computed: {
+      loaded() {
+        return this.loadingPercent + '%'
+      }
+    },
+    watch: {
+      loadingPercent(val) {
+        if (val >= 100) {
+        let body = document.body
+        body.classList.remove("loading")
+        this.gsap.to(".preloader", {
+          yPercent: -100,
+          duration: 1, 
+        })
+        clearInterval(this.interval)
         }
       }
+    },
   }
 </script>
 
@@ -65,6 +63,7 @@ import gsap from "gsap"
   z-index: 100;
   width: 100vw;
   height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
   background: #000;
   display: flex;
   align-items: center;
