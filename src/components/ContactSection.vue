@@ -63,7 +63,7 @@ export default {
       show: false,
       socials: [
         'facebook',
-        'twitters',
+        'twitter',
         'linkedin',
         'dribbble',
         'behance',
