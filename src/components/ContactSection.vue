@@ -35,7 +35,15 @@
             <br>Which challenges are you facing?
             What are your goals and expectations? What would success look like and how much do you plan
             to spend to get there?</p>
-            <socials />
+            <div class="contact-socials">
+                <div class="social-icon"
+                v-for="(item, index) of socials" :key="'item_'+index"
+                >
+                <svg class="ic24">
+                  <use :xlink:href="getIcon('socials', item)"></use>
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -46,20 +54,31 @@
 <script>
 import { SplitText } from "gsap/all";
 import ContactForm from "./ContactForm.vue";
-import socials from "./socials.vue";
+
 
 export default {
   name: 'Contact Form',
   data () {
     return {
       show: false,
+      socials: [
+        'facebook',
+        'twitters',
+        'linkedin',
+        'dribbble',
+        'behance',
+        'instagram'
+      ],
     }
   },
   components: {
     ContactForm,
-    socials
   },
   methods: {
+    // I know it's not necessary in this case, i do it because i can
+    getIcon (socials, icon) {
+      return require(`@/assets/icons/${socials}.svg`)+'#'+icon
+    },
     openContact() {
       this.show = !this.show
     },
